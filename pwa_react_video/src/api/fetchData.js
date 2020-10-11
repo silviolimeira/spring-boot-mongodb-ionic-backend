@@ -2,7 +2,7 @@ import axios from "axios";
 
 //const URL = "https://api.openweatermap.org/data/2.5/weather";
 //const URL = "http://localhost:3333/uploader-1/rest/weather";
-const URL = "http://localhost:3333/weathers";
+const URL = "http://localhost:8080/users";
 
 const API_KEY = "ffaabbccddeeff";
 

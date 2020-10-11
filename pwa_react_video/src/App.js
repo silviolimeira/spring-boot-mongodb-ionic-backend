@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { fetchData } from "./api/fetchData";
 import "./App.css";
 
+import Title from "./components/Title";
+
 const App = () => {
   const [query, setQuery] = useState("");
   const [weatherState, setWeather] = useState({});
@@ -18,6 +20,7 @@ const App = () => {
 
   return (
     <div className="main-container">
+      <Title>Título</Title>
       <input
         type="text"
         className="search"
@@ -33,6 +36,7 @@ const App = () => {
           </h2>
         </div>
       )} */}
+
       {weatherState.weather && (
         <div className="message">
           <p>Weather:</p>
