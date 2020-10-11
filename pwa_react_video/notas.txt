@@ -1,0 +1,21 @@
+Build and Deploy a React PWA - Why Progressive Web Apps are the Future of the Web
+https://www.youtube.com/watch?v=IaJqMcOMuDM&t=969s
+
+https://www.youtube.com/watch?v=IaJqMcOMuDM&list=WL&index=1
+
+
+mkdir pwa_rect_video
+
+// Create react app example
+npx create-react-app ./
+
+npm install --save axios
+
+
+npm run build
+
+Creating an optimized production build...
+
+and then copy the content of build to webapps at jetty folder
+I don't know why copy build/static content in the jetty folder webapps too
+todo: discover
