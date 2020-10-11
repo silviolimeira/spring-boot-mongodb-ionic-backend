@@ -1,10 +1,12 @@
 package com.example.demo.services;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.User;
@@ -51,4 +53,8 @@ public class UserService {
 		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
 
+	public Page<User> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return repo.findAll(pageRequest);
+	}
 }
