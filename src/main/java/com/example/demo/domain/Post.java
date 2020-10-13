@@ -11,6 +11,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.example.demo.dto.AuthorDTO;
 import com.example.demo.dto.CommentDTO;
 
+//ref: 
+//https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#repositories.query-methods.query-creation
+
 @Document
 public class Post implements Serializable {
 	private static final long serialVersionUID = 1L;
