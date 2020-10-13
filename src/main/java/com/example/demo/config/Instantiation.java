@@ -14,8 +14,8 @@ import com.example.demo.domain.User;
 import com.example.demo.domain.enums.Perfil;
 import com.example.demo.dto.AuthorDTO;
 import com.example.demo.dto.CommentDTO;
-import com.example.demo.repository.PostRepository;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.repositories.PostRepository;
+import com.example.demo.repositories.UserRepository;
 
 @Configuration
 public class Instantiation implements CommandLineRunner {

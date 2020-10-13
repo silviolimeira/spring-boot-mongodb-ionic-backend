@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.User;
 import com.example.demo.dto.UserDTO;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.exception.ObjectNotFoundException;
 
 @Service
@@ -61,4 +61,5 @@ public class UserService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
 	}
+	
 }
