@@ -28,7 +28,7 @@ public class User implements Serializable {
 	@DBRef(lazy = true)
 	private Set<Post> posts = new HashSet<>();
 
-	private Set<Integer> perfis = new HashSet<>();
+	private Set<Perfil> perfis = new HashSet<>();
 	
 	public User() {
 		addPerfil(Perfil.CLIENTE);
@@ -52,15 +52,15 @@ public class User implements Serializable {
 //	}
 
 	public void addPerfil(Perfil perfil) {
-		perfis.add(perfil.getCod());
+		perfis.add(perfil);
 	}
 	
 
-	public Set<Integer> getPerfis() {
+	public Set<Perfil> getPerfis() {
 		return perfis;
 	}
 
-	public void setPerfis(Set<Integer> perfis) {
+	public void setPerfis(Set<Perfil> perfis) {
 		this.perfis = perfis;
 	}
 
