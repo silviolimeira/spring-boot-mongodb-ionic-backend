@@ -19,6 +19,10 @@ import com.example.demo.domain.User;
 import com.example.demo.dto.UserDTO;
 import com.example.demo.services.UserService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping(value="/users")
 public class UserResource {
@@ -33,6 +37,7 @@ public class UserResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@ApiOperation(value="Busca por id")
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> findById(@PathVariable String id) {
 		User obj = service.findById(id);
@@ -47,6 +52,10 @@ public class UserResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@ApiResponses(value= {
+			@ApiResponse(code = 400, message = "Não é possivel expluir um user que tem posts"),
+			@ApiResponse(code = 404, message = "Código inexistente.")
+	})
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<?> delete(@PathVariable String id) {
 		service.delete(id);
@@ -63,6 +72,7 @@ public class UserResource {
 	
 	// ex: /users/page?page=0&linesPerPage=20
 	// EX: http://localhost:3333/users/page?linesPerPage=3&page=1&direction=DESC
+	@ApiOperation(value="Retorna usuários com paginação")
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity<?> findPage(
 			@RequestParam(value="page", defaultValue="0") Integer page, 
