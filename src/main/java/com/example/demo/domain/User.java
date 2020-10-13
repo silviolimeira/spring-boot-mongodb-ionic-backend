@@ -28,7 +28,6 @@ public class User implements Serializable {
 	@DBRef(lazy = true)
 	private Set<Post> posts = new HashSet<>();
 
-	//@JsonValue
 	private Set<Integer> perfis = new HashSet<>();
 	
 	public User() {

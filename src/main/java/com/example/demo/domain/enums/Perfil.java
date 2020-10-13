@@ -11,13 +11,12 @@ public enum Perfil {
 	private int cod;
 	private String descricao;
 	
-	@JsonCreator
+	//@JsonCreator
 	private Perfil(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
 
-	@JsonValue
 	public int getCod() {
 		return cod;
 	}
@@ -26,6 +25,7 @@ public enum Perfil {
 		this.cod = cod;
 	}
 
+	//@JsonValue
 	public String getDescricao() {
 		return descricao;
 	}
