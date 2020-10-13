@@ -8,6 +8,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Document //(collection="user")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,16 +20,28 @@ public class User implements Serializable {
 	private String name;
 	private String email;
 	
+	@JsonIgnore
+	private String password;
+	
 	@DBRef(lazy = true)
 	private Set<Post> posts = new HashSet<>();
 	
 	public User() {}
 	
-	public User(String id, String name, String email) {
+	public User(String id, String name, String email, String password) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.password = password;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getId() {

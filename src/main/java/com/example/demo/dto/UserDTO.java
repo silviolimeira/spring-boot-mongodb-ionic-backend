@@ -2,6 +2,8 @@ package com.example.demo.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.example.demo.domain.User;
 
 public class UserDTO implements Serializable {
@@ -12,6 +14,9 @@ public class UserDTO implements Serializable {
 	private String name;
 	private String email;
 	
+	@NotEmpty(message="Preenchimento obrigatorio")
+	private String password;
+	
 	public UserDTO() {}
 	
 	public UserDTO(User obj) {
@@ -20,6 +25,8 @@ public class UserDTO implements Serializable {
 		email = obj.getEmail();
 	}
 
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -42,6 +49,18 @@ public class UserDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import java.util.TimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.example.demo.domain.Post;
 import com.example.demo.domain.User;
@@ -22,6 +23,8 @@ public class Instantiation implements CommandLineRunner {
 	private UserRepository userRepository;
 	@Autowired
 	private PostRepository postRepository;
+	@Autowired
+	private BCryptPasswordEncoder pe;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -33,9 +36,9 @@ public class Instantiation implements CommandLineRunner {
 		postRepository.deleteAll();
 		
 		
-		User maria = new User(null, "Maria Brown", "maria@gmail.com");
-		User alex = new User(null, "Alex Green", "alex@gmail.com");
-		User bob = new User(null, "Bob Grey", "bob@gmail.com");
+		User maria = new User(null, "Maria Brown", "maria@gmail.com", pe.encode("maria"));
+		User alex = new User(null, "Alex Green", "alex@gmail.com", pe.encode("alex"));
+		User bob = new User(null, "Bob Grey", "bob@gmail.com", pe.encode("bob"));
 		
 		userRepository.saveAll(Arrays.asList(maria, alex, bob));
 		
