@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.example.demo.domain.Post;
 import com.example.demo.domain.User;
+import com.example.demo.domain.enums.Perfil;
 import com.example.demo.dto.AuthorDTO;
 import com.example.demo.dto.CommentDTO;
 import com.example.demo.repository.PostRepository;
@@ -37,10 +38,13 @@ public class Instantiation implements CommandLineRunner {
 		
 		
 		User maria = new User(null, "Maria Brown", "maria@gmail.com", pe.encode("maria"));
+		maria.addPerfil(Perfil.ADMIN);
 		User alex = new User(null, "Alex Green", "alex@gmail.com", pe.encode("alex"));
 		User bob = new User(null, "Bob Grey", "bob@gmail.com", pe.encode("bob"));
+		User admin = new User(null, "Admin", "admin@gmail.com", pe.encode("admin"));
+		admin.addPerfil(Perfil.ADMIN);
 		
-		userRepository.saveAll(Arrays.asList(maria, alex, bob));
+		userRepository.saveAll(Arrays.asList(maria, alex, bob, admin));
 		
 		
 		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu Viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));

@@ -8,7 +8,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.example.demo.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 @Document //(collection="user")
 public class User implements Serializable {
@@ -25,8 +27,13 @@ public class User implements Serializable {
 	
 	@DBRef(lazy = true)
 	private Set<Post> posts = new HashSet<>();
+
+	//@JsonValue
+	private Set<Integer> perfis = new HashSet<>();
 	
-	public User() {}
+	public User() {
+		addPerfil(Perfil.CLIENTE);
+	}
 	
 	public User(String id, String name, String email, String password) {
 		super();
@@ -34,12 +41,34 @@ public class User implements Serializable {
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		addPerfil(Perfil.CLIENTE);
 	}
 	
+//	public Set<Integer> getPerfis() {
+//		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+//	}
+//
+//	public void setPerfis(Set<Perfil> perfis) {
+//		this.perfis = perfis;
+//	}
+
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
+	}
+	
+
+	public Set<Integer> getPerfis() {
+		return perfis;
+	}
+
+	public void setPerfis(Set<Integer> perfis) {
+		this.perfis = perfis;
+	}
+
 	public String getPassword() {
 		return password;
 	}
-
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -76,10 +105,6 @@ public class User implements Serializable {
 		this.posts = posts;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
