@@ -14,7 +14,6 @@ import com.example.demo.dto.EmailDTO;
 import com.example.demo.security.JWTUtil;
 import com.example.demo.security.UserSS;
 import com.example.demo.services.AuthService;
-import com.example.demo.services.EmailService;
 import com.example.demo.services.UserService;
 
 @RestController

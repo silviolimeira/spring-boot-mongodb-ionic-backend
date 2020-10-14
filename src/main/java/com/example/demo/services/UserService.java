@@ -23,35 +23,35 @@ import com.example.demo.services.exception.ObjectNotFoundException;
 public class UserService {
 
 	@Autowired
-	private UserRepository repo; 
+	private UserRepository repo;
 	@Autowired
 	private BCryptPasswordEncoder pe;
-	
+
 	public List<User> findAll() {
 		return repo.findAll();
 	}
-	
+
 	public User findById(String id) {
 		Optional<User> user = repo.findById(id);
 		return user.orElseThrow(() -> new ObjectNotFoundException("Objecto não encontrado"));
 	}
-	
+
 	public User insert(User obj) {
 		pe.encode(obj.getPassword());
 		return repo.insert(obj);
 	}
-	
+
 	public void delete(String id) {
 		findById(id);
 		repo.deleteById(id);
 	}
-	
+
 	public User update(User obj) {
 		User newObj = findById(obj.getId());
 		updateData(newObj, obj);
 		return repo.save(newObj);
 	}
-	
+
 	private void updateData(User newObj, User obj) {
 		newObj.setName(obj.getName());
 		newObj.setEmail(obj.getEmail());
@@ -59,6 +59,19 @@ public class UserService {
 
 	public User fromDTO(UserDTO objDto) {
 		return new User(objDto.getId(), objDto.getName(), objDto.getEmail(), null);
+	}
+
+	public User findByEmail(String email) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		User obj = repo.findById(user.getId()).get();
+		if (obj == null) {
+			throw new ObjectNotFoundException(
+					"Objeto não encontrado! Id: " + user.getId() + ", Tipo: " + User.class.getName());
+		}
+		return obj;
 	}
 
 	public Page<User> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
@@ -69,14 +82,13 @@ public class UserService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
 	}
-	
+
 	public static UserSS authenticated() {
 		try {
 			return (UserSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
-	}	
-	
+	}
+
 }

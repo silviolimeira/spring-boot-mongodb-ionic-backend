@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	};
 
 
+	// http://localhost:8080/swagger-ui.html
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()
