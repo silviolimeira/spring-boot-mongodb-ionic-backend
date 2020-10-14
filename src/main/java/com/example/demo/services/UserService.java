@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.User;
+import com.example.demo.domain.enums.Perfil;
 import com.example.demo.dto.UserDTO;
 import com.example.demo.repositories.UserRepository;
 import com.example.demo.security.UserSS;
@@ -62,7 +63,7 @@ public class UserService {
 
 	public Page<User> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		UserSS user = UserService.authenticated();
-		if (user == null) {
+		if (user == null || !user.hasRole(Perfil.ADMIN)) {
 			throw new AuthorizationException("Acesso negado");
 		}
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);

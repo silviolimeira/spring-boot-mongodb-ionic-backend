@@ -74,7 +74,7 @@ public class UserResource {
 	// ex: /users/page?page=0&linesPerPage=20
 	// EX: http://localhost:3333/users/page?linesPerPage=3&page=1&direction=DESC
 	@ApiOperation(value="Retorna usuários com paginação")
-	@PreAuthorize("hasAnyRole('ADMIN')")
+	//@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity<?> findPage(
 			@RequestParam(value="page", defaultValue="0") Integer page, 
