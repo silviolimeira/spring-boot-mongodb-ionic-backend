@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum Perfil {
 	
-	ADMIN(1, "ROLE_AMIN"),
+	ADMIN(1, "ROLE_ADMIN"),
 	CLIENTE(2, "ROLE_USER");
 	
 	private int cod;
