@@ -5,6 +5,8 @@ import { CredentialsDTO } from 'src/models/credentials.dto';
 import { LocalUser } from 'src/models/local_user';
 import { StorageService } from './storage.service';
 
+import jwt_decode from "jwt-decode";
+
 @Injectable()
 export class AuthService {
 
@@ -19,9 +21,17 @@ export class AuthService {
     }
 
     sucessfulLogin(authorization: string) {
+
         let tok = authorization.substring(7);
+
+        let decoded = jwt_decode(tok);
+        console.log("decoded:");
+        console.log(decoded);
+
+
         let user : LocalUser = {
-            token: tok
+            token: tok,
+            email: jwt_decode(tok).sub
         }
         this.storage.setLocalUser(user);
     }
