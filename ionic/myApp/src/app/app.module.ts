@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpErrorInterceptor } from 'src/interceptors/error-interceptor';
+import { ErrorInterceptorProvider } from 'src/interceptors/error-interceptor';
 import { StorageService } from 'src/services/storage.service';
 import { AuthService } from 'src/services/auth.service';
 
@@ -22,11 +22,7 @@ import { AuthService } from 'src/services/auth.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
-      multi: true
-    },
+    ErrorInterceptorProvider,
     StorageService,
     AuthService
   ],

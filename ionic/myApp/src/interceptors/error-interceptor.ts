@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-export class HttpErrorInterceptor implements HttpInterceptor {
+export class ErrorInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       return next.handle(request)
         .pipe(
@@ -24,3 +24,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         )
     }
   }
+
+export const ErrorInterceptorProvider = {
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorInterceptor,
+    multi: true
+};  
