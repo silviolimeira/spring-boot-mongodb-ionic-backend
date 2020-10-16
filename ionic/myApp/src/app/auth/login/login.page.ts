@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { API_CONFIG } from 'api.config';
-import { CredentialsDTO } from 'src/app/models/credentials.dto';
+import { API_CONFIG } from 'src/config/api.config';
+import { CredentialsDTO } from 'src/models/credentials.dto';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,24 +16,18 @@ export class LoginPage implements OnInit {
     password: ''
   }
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, public authService: AuthService) { }
 
   ngOnInit() {
   }
 
   login() {
     console.log("login");
-    console.log(this.creds);
-
-    this.http.post(
-        `${API_CONFIG.baseURL}/login`, 
-        this.creds,
-        { observe: 'response', responseType: 'text'}
-      ).subscribe( response => {
-        console.log(response.headers.get('Authorization'));
-      }, 
-      error => {}
-    )    
+    this.authService.authenticate(this.creds)
+      .subscribe(response => {
+        this.authService.sucessfulLogin(response.headers.get('Authorization'));
+      },
+      error => {})
   }
 
 }

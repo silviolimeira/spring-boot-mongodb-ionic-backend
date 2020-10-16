@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from 'src/interceptors/error-interceptor';
+import { StorageService } from 'src/services/storage.service';
+import { AuthService } from 'src/services/auth.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +26,9 @@ import { HttpErrorInterceptor } from 'src/interceptors/error-interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
-    }
+    },
+    StorageService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
