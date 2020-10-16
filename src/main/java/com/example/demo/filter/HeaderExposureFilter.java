@@ -26,7 +26,7 @@ public class HeaderExposureFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		res.addHeader("access-control-expose-headers", "location");
 		res.addHeader("Content-Type", "application/json; charset=utf-8");
-		res.addHeader("mstech", "MSTECH BL");
+		//res.addHeader("mstech", "MSTECH BL");
 		chain.doFilter(request, response);
 	}
 
