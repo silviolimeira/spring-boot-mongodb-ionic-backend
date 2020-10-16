@@ -1,0 +1,44 @@
+Install the Ionic CLI
+npm install -g @ionic/cli
+
+Uninstall
+npm uninstall -g ionic
+npm install -g @ionic/cli
+
+Start an app
+ionic start myApp tabs
+
+Run the app
+cd myApp
+ionic serve
+
+Login:
+https://www.techiediaries.com/ionic-ui-forms-theming/
+
+
+*   Your Capacitor project is ready to go!  *
+
+Add platforms using "npx cap add":
+
+  npx cap add android
+  npx cap add ios
+  npx cap add electron
+
+Follow the Developer Workflow guide to get building:
+https://capacitorjs.com/docs/basics/workflow
+
+[OK] Integration capacitor added!
+
+
+Your Ionic app is ready! Follow these next steps:
+
+- Go to your new project: cd .\myApp
+- Run ionic serve within the app directory to see your app in the browser
+- Run ionic capacitor add to add a native iOS or Android project using Capacitor
+- Generate your app icon and splash screens using cordova-res --skip-config --copy
+- Explore the Ionic docs for components, tutorials, and more: https://ion.link/docs
+- Building an enterprise app? Ionic has Enterprise Support and Features: https://ion.link/enterprise-edition
+
+
+Tela de Login:
+ionic generate page auth/login
