@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { API_CONFIG } from 'api.config';
+import { CredentialsDTO } from 'src/app/models/credentials.dto';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,11 @@ import { API_CONFIG } from 'api.config';
 })
 export class LoginPage implements OnInit {
 
+  creds: CredentialsDTO = {
+    email: '',
+    password: ''
+  }
+
   constructor(public http: HttpClient) { }
 
   ngOnInit() {
@@ -16,10 +22,11 @@ export class LoginPage implements OnInit {
 
   login() {
     console.log("login");
+    console.log(this.creds);
 
     this.http.post(
         `${API_CONFIG.baseURL}/login`, 
-        { email: 'admin@gmail.com', password: 'admin1'},
+        this.creds,
         { observe: 'response', responseType: 'text'}
       ).subscribe( response => {
         console.log(response.headers.get('Authorization'));
