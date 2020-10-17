@@ -13,6 +13,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptorProvider } from 'src/interceptors/error-interceptor';
 import { StorageService } from 'src/services/storage.service';
 import { AuthService } from 'src/services/auth.service';
+import { AuthInterceptorProvider } from 'src/interceptors/auth-interceptor';
+import { UserService } from 'src/services/user.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,9 +24,11 @@ import { AuthService } from 'src/services/auth.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AuthInterceptorProvider,
     ErrorInterceptorProvider,
     StorageService,
-    AuthService
+    AuthService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

@@ -13,6 +13,8 @@ export class AuthService {
     constructor(public http: HttpClient, public storage: StorageService) { }
 
     authenticate(creds: CredentialsDTO) {
+        console.log('authenticate: ' + JSON.stringify(creds));
+        console.log(`${API_CONFIG.baseURL}/login`);
         return this.http.post(
             `${API_CONFIG.baseURL}/login`, 
             creds,
@@ -22,6 +24,7 @@ export class AuthService {
 
     sucessfulLogin(authorization: string) {
 
+        console.log('successfulLogin');
         let tok = authorization.substring(7);
 
         let decoded = jwt_decode(tok);
