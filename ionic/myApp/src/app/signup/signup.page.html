@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="formGroup" (ngSubmit)="signUpUser(); $event.preventDefault()">
+    <ion-item>
+      <ion-label stacket>Nome*</ion-label>
+      <ion-input formControlName="userName" type="text"> </ion-input>
+    </ion-item>
+    <p *ngIf="formGroup.controls['userName'].hasError('dirty')" margin-left>Valor inválido</p>
+    <ion-item>
+      <ion-label stacket>Email*</ion-label>
+      <ion-input formControlName="userEmail" type="text"> </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacket>Senha*</ion-label>
+      <ion-input formControlName="userPassword" type="password"> </ion-input>
+    </ion-item>
+    <ion-list radio-group>
+      <ion-radio-group formControlName="userPerfil" (ionChange)="updatePerfil()">
+        <ion-list-header>
+          <ion-label>Perfil do úsuario</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Adminstrador</ion-label>
+          <ion-radio checked="false" value="1"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Cliente</ion-label>
+          <ion-radio checked="true" value="2"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+    <ion-button ion-button block type="submit" size="large" expand="block" [disabled]="formGroup.invalid">Criar Usuário</ion-button>
+  </form>
+
+</ion-content>
