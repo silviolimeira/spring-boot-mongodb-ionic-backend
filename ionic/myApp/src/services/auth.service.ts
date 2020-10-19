@@ -6,10 +6,15 @@ import { LocalUser } from "src/models/local_user";
 import { StorageService } from "./storage.service";
 
 import jwt_decode from "jwt-decode";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class AuthService {
-  constructor(public http: HttpClient, public storage: StorageService) {}
+  constructor(
+    public http: HttpClient,
+    public storage: StorageService,
+    public router: Router
+  ) {}
 
   authenticate(creds: CredentialsDTO) {
     console.log("authenticate: " + JSON.stringify(creds));
@@ -45,6 +50,8 @@ export class AuthService {
   }
 
   logout() {
+    console.log("Logut ***");
     this.storage.setLocalUser(null);
+    this.router.navigate([""]);
   }
 }
