@@ -16,7 +16,7 @@ export class UserService {
     console.log(`${API_CONFIG.baseURL}/users/email?value=${email}`);
 
     return this.http.get<any>(
-      `${API_CONFIG.baseURL}/userss/email?value=${email}`
+      `${API_CONFIG.baseURL}/users/email?value=${email}`
     );
   }
 }

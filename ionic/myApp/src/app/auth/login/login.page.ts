@@ -43,6 +43,20 @@ export class LoginPage implements OnInit {
     );
   }
 
+  ionViewDidEnter() {
+    console.log("login");
+    this.authService.refreshToken().subscribe(
+      (response) => {
+        console.log(response);
+        this.authService.sucessfulLogin(response.headers.get("Authorization"));
+        this.router.navigate(["home"]);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   find() {
     this.userService.findByEmail(this.creds.email).subscribe(
       (response) => {
