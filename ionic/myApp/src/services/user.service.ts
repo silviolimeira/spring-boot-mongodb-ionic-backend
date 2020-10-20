@@ -22,7 +22,7 @@ export class UserService {
   }
 
   insert(obj: UserDTO) {
-    console.log("inser: " + JSON.stringify(obj));
+    console.log("insert: " + JSON.stringify(obj));
     return this.http.post(`${API_CONFIG.baseURL}/users`, obj, {
       observe: "response",
       responseType: "text",
