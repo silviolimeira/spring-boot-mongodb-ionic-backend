@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { API_CONFIG } from "src/config/api.config";
+import { UserDTO } from "src/models/user.dto";
 import { StorageService } from "./storage.service";
 
 @Injectable()
@@ -18,5 +19,13 @@ export class UserService {
     return this.http.get<any>(
       `${API_CONFIG.baseURL}/users/email?value=${email}`
     );
+  }
+
+  insert(obj: UserDTO) {
+    console.log("inser: " + JSON.stringify(obj));
+    return this.http.post(`${API_CONFIG.baseURL}/users`, obj, {
+      observe: "response",
+      responseType: "text",
+    });
   }
 }

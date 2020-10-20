@@ -37,6 +37,7 @@ public class UserService {
 	}
 
 	public User insert(User obj) {
+		System.out.println("insert: " + obj.getPassword());
 		pe.encode(obj.getPassword());
 		return repo.insert(obj);
 	}

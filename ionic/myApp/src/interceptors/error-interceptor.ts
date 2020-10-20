@@ -12,6 +12,7 @@ import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { StorageService } from "src/services/storage.service";
 import { AlertController } from "@ionic/angular";
+import { FieldMessage } from "src/models/fieldmessage";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -27,12 +28,13 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMsg = "";
+        let errorObj = {};
         if (error.error instanceof ErrorEvent) {
           console.log("this is client side error");
           errorMsg = `Error: ${error.error.message}`;
         } else {
           console.log("this is server side error");
-          errorMsg = error.error;
+          errorObj = error.error;
           console.log("error: " + JSON.stringify(errorMsg));
           console.log(JSON.stringify(errorMsg));
         }
@@ -44,16 +46,54 @@ export class ErrorInterceptor implements HttpInterceptor {
           case 403:
             this.handle403();
             break;
+          case 422:
+            this.handle422(errorObj);
+            break;
           default:
             this.handleDefaultError(errorMsg);
         }
 
-        return throwError(errorMsg);
+        return throwError(errorObj);
       })
     );
   }
 
+  private listErrors(messages: FieldMessage[]): string {
+    let s: string = "";
+
+    for (var i = 0; i < messages.length; i++) {
+      s =
+        s +
+        "<p><strong>" +
+        messages[i].fieldName +
+        "</strong>" +
+        messages[i].message +
+        "</p>";
+    }
+
+    return s;
+  }
+
+  async handle422(errorObj) {
+    const alert = await this.alertController.create({
+      cssClass: "my-custom-class",
+      header: "Erro 422: Validação",
+      message: this.listErrors(errorObj.errors),
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: "OK",
+          handler: () => {
+            console.log("handle 422 ok");
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
   async handleDefaultError(error) {
+    //public alertController: AlertController
     const alert = await this.alertController.create({
       cssClass: "my-custom-class",
       header: "Erro " + error.status + ": " + error.error,

@@ -51,8 +51,9 @@ public class UserResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<?> insert(@RequestBody UserDTO objDto) {
-		User obj = service.fromDTO(objDto);
+	public ResponseEntity<?> insert(@RequestBody User obj) {
+		//User obj = service.fromDTO(objDto);
+		System.out.println("service password: " + obj.getPassword());
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();

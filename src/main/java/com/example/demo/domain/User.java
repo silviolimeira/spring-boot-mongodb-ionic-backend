@@ -22,7 +22,7 @@ public class User implements Serializable {
 	private String name;
 	private String email;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	private String password;
 	
 	@DBRef(lazy = true)
