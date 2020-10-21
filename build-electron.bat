@@ -1,6 +1,7 @@
 cd ionic
 cd myApp
 npm i @capacitor-community/electron
+rm -rf capacitor
 npx cap add @capacitor-community/electron
 ionic build && npx cap copy @capacitor-community/electron
 npx cap open @capacitor-community/electron
