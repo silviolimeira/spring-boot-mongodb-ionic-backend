@@ -6,4 +6,5 @@ npx cap add @capacitor-community/electron
 ionic build && npx cap copy @capacitor-community/electron
 npx cap open @capacitor-community/electron
 cd electron
+npm install electron-packager --save-dev
 electron-packager . --platform=win32 --overwrite
