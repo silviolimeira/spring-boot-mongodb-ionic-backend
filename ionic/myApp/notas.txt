@@ -19,10 +19,48 @@ https://www.techiediaries.com/ionic-ui-forms-theming/
 *   Your Capacitor project is ready to go!  *
 
 Add platforms using "npx cap add":
-
+  
   npx cap add android
   npx cap add ios
   npx cap add electron
+
+  or
+
+  ionic start appName blank --type=angular --capacitor
+
+  after 
+
+  /* deprecated
+  npm install electron-packager --save-dev
+  ng update @angular/cli @angular/core --allow-dirty ***???
+  npx cap add electron
+  ionic build 
+  */
+
+  npm i @capacitor-community/electron
+  npx cap add @capacitor-community/electron
+  #electron:start
+  #npx cap <command> @capacitor-community/electron
+  ionic build && npx cap copy @capacitor-community/electron
+  npx cap open @capacitor-community/electron
+  cd electron
+  electron-packager . --platform=win32 --overwrite
+
+    Changing the default configuration
+    In the *yourAppDir*/electron/src/index.ts file there will be a line reading: const myCapacitorApp = createCapacitorElectronApp(); here you can pass an object with your desired config changes (see config options for details).
+
+    For example if you wanted to disable the splashscreen from showing while the app starts up you would pass an object like the following:
+
+    Copy
+    const myCapacitorApp = createCapacitorElectronApp({
+      splashScreen: {
+        useSplashScreen: false,
+      },
+    });
+
+
+git reset --hard && git clean -fd && git clean -fX && rm -rf electron
+
 
 Follow the Developer Workflow guide to get building:
 https://capacitorjs.com/docs/basics/workflow
